@@ -1,40 +1,54 @@
-import java.util.Scanner;
-
+import java.util.Arrays;
 
 public class fancyTree {
 
 	public static void main(String[] args){
-		
-		int numPoints; //number of points
-		int numQueries; //number of queries
-		
-		Scanner s = new Scanner(System.in);
-		
-		numPoints = s.nextInt();
-		numQueries = s.nextInt();
-		
-		node[] points = new node[numPoints];
-		query[] queries = new query[numQueries];
-		
-		int[] coords = new int[3];
-		for(int i = 0; i < numPoints; i++){
-			coords[0] = s.nextInt();
-			coords[1] = s.nextInt();
-			coords[2] = s.nextInt();
-			points[i] = new node(coords);
+
+	    int[] binarySearch(int[] sortedZ, int minZ, int maxZ)
+	    {
+		int top = sortedZ.length - 1;
+		int bottom = 0;
+		int mid = 0;
+
+		while(top > bottom)
+		{
+		    mid = (top + bottom)/2;
+		    if(sortedZ[mid] < minZ)
+		    {
+			bottom = mid+1;
+		    }
+		    else if(sortedZ[mid] > minZ)
+		    {
+			top = mid-1;
+		    }
 		}
-		
-		coords = new int[6];
-		for(int i = 0; i < numQueries; i++){
-			coords[0] = s.nextInt();
-			coords[1] = s.nextInt();
-			coords[2] = s.nextInt();
-			coords[3] = s.nextInt();
-			coords[4] = s.nextInt();
-			coords[5] = s.nextInt();
-			queries[i] = new query(coords);
+		int minI = mid;
+
+		top = sortedZ.length - 1;
+		bottom = 0;
+		mid = 0;
+
+		while(top > bottom)
+		{
+		    mid = (top + bottom)/2;
+		    if(sortedZ[mid] < maxZ)
+		    {
+			bottom = mid+1;
+		    }
+		    else if(sortedZ[mid] > maxZ)
+		    {
+			top = mid-1;
+		    }
 		}
-		
-		
+		int maxI = mid;
+
+		int[] range = Arrays.copyOfRange(sortedZ, minI, maxI);
+
+		return range;
+
+	    }
+    
+    
 	}
+
 }

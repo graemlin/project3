@@ -1,7 +1,7 @@
 
 public class node {
 
-	int value;
+	int[] value;
 	
 	node leftChild;
 	node rightChild;
@@ -10,9 +10,8 @@ public class node {
 	
 	//associated structure
 	
-	public node(int value, int[] region){
+	public node(int[] value){
 		this.value = value;
-		this.region = region;
 	}
 	
 	public void setLeftChild(node left){

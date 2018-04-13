@@ -10,11 +10,11 @@ public class node {
 	
 	//associated structure
 	
-	public node(int[] value){
-		this.value = new Integer[3];
-		this.value[0] = new Integer(value[0]);
-		this.value[1] = new Integer(value[1]);
-		this.value[2] = new Integer(value[2]);
+	public node(int x, int y, int z){
+		value = new Integer[3];
+		value[0] = new Integer(x);
+		value[1] = new Integer(y);
+		value[2] = new Integer(z);
 	}
 	
 	public void setLeftChild(node left){
@@ -23,5 +23,13 @@ public class node {
 	
 	public void setRightChild(node right){
 		rightChild = right;
+	}
+	
+	public void setRegion(int xMin, int xMax, int yMin, int yMax){
+		region = new int[4];
+		region[0] = xMin;
+		region[1] = xMax;
+		region[2] = yMin;
+		region[3] = yMax;
 	}
 }

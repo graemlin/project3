@@ -18,10 +18,7 @@ public class main {
 		
 		int[] coords = new int[3];
 		for(int i = 0; i < numPoints; i++){
-			coords[0] = s.nextInt();
-			coords[1] = s.nextInt();
-			coords[2] = s.nextInt();
-			points[i] = new node(coords);
+			points[i] = new node(s.nextInt(),s.nextInt(), s.nextInt());
 		}
 		
 		coords = new int[6];

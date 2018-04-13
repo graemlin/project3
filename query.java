@@ -8,6 +8,10 @@ public class query {
 	int zMin;
 	int zMax;
 	
+	/**
+	 * Creates a new query object
+	 * @param coords xMin, xMax, yMin, yMax, zMin, zMax
+	 */
 	public query(int[] coords){
 		xMin = coords[0];
 		xMax = coords[1];

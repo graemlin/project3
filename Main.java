@@ -104,6 +104,8 @@ public class Main {
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
 
+			return splitNode;
+
 		} else {
 			if(sortedY.size() == 1) {
 				node leaf = sortedY.get(0);
@@ -136,6 +138,7 @@ public class Main {
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
 
+			return splitNode; 
 		}
 
 	}

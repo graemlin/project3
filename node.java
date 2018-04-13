@@ -32,4 +32,8 @@ public class node {
 		region[2] = yMin;
 		region[3] = yMax;
 	}
+	
+	public String toString(){
+		return "X: " + value[0] + "  Y: " + value[1] + "  Z: " + value[2];
+	}
 }

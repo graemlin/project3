@@ -20,4 +20,9 @@ public class query {
 		zMin = coords[4];
 		zMax = coords[5];
 	}
+	
+	public String toString(){
+		return "xMin: " + xMin + "  xMax: " + xMax + "  yMin: " + yMax
+				+ "  yMax: " + yMax + "  zMin: " + zMin + "  zMax: " + zMax;
+	}
 }

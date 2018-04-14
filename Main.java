@@ -70,7 +70,7 @@ public class Main {
 		}
 	}
 
-	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, int depth) {
+	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, int[] region, int depth) {
 
 		if(depth%2 == 0) {
 			if(sortedX.size() == 1) {
@@ -98,8 +98,15 @@ public class Main {
 					leftY.add(sortedY.get(i));
 				}
 			}
-			node vLeft = buildKDTree(leftX, leftY, depth+1);
-			node vRight = buildKDTree(rightX, rightY, depth+1);
+
+			int[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
+			int[] rightRegion = {splitNode.value[0],region[1], region[2], region[3]};
+
+			node vLeft = buildKDTree(leftX, leftY, leftRegion,depth+1);
+			node vRight = buildKDTree(rightX, rightY, rightRegion, depth+1);
+
+			vLeft.setRegion(leftRegion);
+			vRight.setRegion(rightRegion);
 
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
@@ -132,13 +139,19 @@ public class Main {
 				}
 			}
 
-			node vLeft = buildKDTree(bottomX, bottomY, depth+1);
-			node vRight = buildKDTree(topX, topY, depth+1);
+			int[] bottomRegion = {region[0], region[1], splitNode.value[1], region[3]};
+			int[] topRegion = {region[0], region[1], region[2], splitNode.value[1]};
+			
+			node vLeft = buildKDTree(bottomX, bottomY, bottomRegion,depth+1);
+			node vRight = buildKDTree(topX, topY, topRegion,depth+1);
+
+			vLeft.setRegion(bottomRegion);
+			vRight.setRegion(topRegion);
 
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
 
-			return splitNode; 
+			return splitNode;
 		}
 
 	}

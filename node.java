@@ -25,12 +25,12 @@ public class node {
 		rightChild = right;
 	}
 	
-	public void setRegion(int xMin, int xMax, int yMin, int yMax){
+	public void setRegion(int[] r){
 		region = new int[4];
-		region[0] = xMin;
-		region[1] = xMax;
-		region[2] = yMin;
-		region[3] = yMax;
+		region[0] = r[0]; //xMin;
+		region[1] = r[1]; //xMax;
+		region[2] = r[2]; //yMin;
+		region[3] = r[3]; //yMax;
 	}
 	
 	public String toString(){

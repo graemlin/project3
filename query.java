@@ -23,13 +23,49 @@ public class query {
 		zMax = coords[5];
 	}
 		
-	public ArrayList<node> checkNodesByZ(ArrayList<node> foo){
-		ArrayList<node> inQuery = new ArrayList<node>();
-		for(node bar : foo){
-			if(bar.isInQuery(this)) inQuery.add(bar);
-		}
-		return inQuery;
+    public ArrayList<node> binarySearchonZ(ArrayList<node> sortedZ, int minZ, int maxZ)
+    {
+	int top = sortedZ.size() - 1;
+	int bottom = 0;
+	int mid = 0;
+
+	while(top > bottom)
+	{
+	    mid = (top + bottom)/2;
+	    if(sortedZ.get(mid).value[2].intValue() < minZ)
+	    {
+		bottom = mid+1;
+	    }
+	    else if(sortedZ.get(mid).value[2].intValue() > minZ)
+	    {
+		top = mid-1;
+	    }
 	}
+	int minI = mid;
+
+	top = sortedZ.size() - 1;
+	bottom = 0;
+	mid = 0;
+
+	while(top > bottom)
+	{
+	    mid = (top + bottom)/2;
+	    if(sortedZ.get(mid).value[2].intValue() < maxZ)
+	    {
+		bottom = mid+1;
+	    }
+	    else if(sortedZ.get(mid).value[2].intValue() > maxZ)
+	    {
+		top = mid-1;
+	    }
+	}
+	int maxI = mid;
+
+	ArrayList<node> range = (ArrayList<node>) sortedZ.subList(minI, maxI);
+
+	return range;
+
+    }
 	
 	public String toString(){
 		return "xMin: " + xMin + "  xMax: " + xMax + "  yMin: " + yMax

@@ -94,6 +94,7 @@ public class Main {
 			ArrayList<node> leftX = new ArrayList<>(sortedX.subList(0, median));
 			ArrayList<node> rightX = new ArrayList<>(sortedX.subList(median, sortedX.size()));
 			node splitNode = leftX.get(leftX.size()-1);
+			splitNode.setAssocZ(sortedZ);
 
 			ArrayList<node> leftY = new ArrayList<>();
 			ArrayList<node> rightY = new ArrayList<>();
@@ -154,7 +155,8 @@ public class Main {
 			ArrayList<node> bottomY = new ArrayList<>(sortedY.subList(0, median));
 			ArrayList<node> topY = new ArrayList<>(sortedY.subList(median, sortedY.size()));
 			node splitNode = bottomY.get(bottomY.size()-1);
-
+			splitNode.setAssocZ(sortedZ);
+			
 			ArrayList<node> bottomX = new ArrayList<>();
 			ArrayList<node> topX = new ArrayList<>();
 			ArrayList<node> bottomZ = new ArrayList<>();

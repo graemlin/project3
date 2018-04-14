@@ -33,7 +33,15 @@ public class node {
 		region[2] = r[2]; //yMin;
 		region[3] = r[3]; //yMax;
 	}
-	
+
+	public ArrayList<node> getAssocZ() {
+		return assocZ;
+	}
+
+	public void setAssocZ(ArrayList<node> assocZ) {
+		this.assocZ = assocZ;
+	}
+
 	public String toString(){
 		return "X: " + value[0] + "  Y: " + value[1] + "  Z: " + value[2];
 	}

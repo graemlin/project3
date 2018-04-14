@@ -70,13 +70,21 @@ public class Main {
 		}
 	}
 
-	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, ArrayList<node> sortedZ, int[] region, int depth) {
+	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, ArrayList<node> sortedZ, Integer[] region, int depth) {
 
 		if(depth%2 == 0) {
 			if(sortedX.size() == 1) {
 				node leaf = sortedX.get(0);
 				leaf.rightChild = null;
 				leaf.leftChild = null;
+
+				//setting its associated structure to itself
+				ArrayList<node> assoc = new ArrayList<>();
+				assoc.add(leaf);
+				leaf.assocZ = assoc;
+
+				//setting its region to itself
+				leaf.setRegion(leaf.value);
 				return leaf;
 			}
 
@@ -111,8 +119,8 @@ public class Main {
 				}
 			}
 
-			int[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
-			int[] rightRegion = {splitNode.value[0],region[1], region[2], region[3]};
+			Integer[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
+			Integer[] rightRegion = {splitNode.value[0],region[1], region[2], region[3]};
 
 			node vLeft = buildKDTree(leftX, leftY, leftZ, leftRegion,depth+1);
 			node vRight = buildKDTree(rightX, rightY, rightZ, rightRegion, depth+1);
@@ -130,6 +138,14 @@ public class Main {
 				node leaf = sortedY.get(0);
 				leaf.rightChild = null;
 				leaf.leftChild = null;
+
+				//setting its associated structure to itself
+				ArrayList<node> assoc = new ArrayList<>();
+				assoc.add(leaf);
+				leaf.assocZ = assoc;
+
+				//setting its region to itself
+				leaf.setRegion(leaf.value);
 				return leaf;
 			}
 
@@ -163,8 +179,8 @@ public class Main {
 			}
 
 			//used to recursively set regions for proceeding nodes
-			int[] bottomRegion = {region[0], region[1], splitNode.value[1], region[3]};
-			int[] topRegion = {region[0], region[1], region[2], splitNode.value[1]};
+			Integer[] bottomRegion = {region[0], region[1], splitNode.value[1], region[3]};
+			Integer[] topRegion = {region[0], region[1], region[2], splitNode.value[1]};
 
 			node vLeft = buildKDTree(bottomX, bottomY, bottomZ, bottomRegion,depth+1);
 			node vRight = buildKDTree(topX, topY, topZ, topRegion, depth+1);

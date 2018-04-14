@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 
 public class node {
 
 	Integer[] value;
-	
+	ArrayList<node> assocZ;
 	node leftChild;
 	node rightChild;
 	
-	int[] region;
+	Integer[] region;
 	
 	//associated structure
 	
@@ -25,8 +26,8 @@ public class node {
 		rightChild = right;
 	}
 	
-	public void setRegion(int[] r){
-		region = new int[4];
+	public void setRegion(Integer[] r){
+		region = new Integer[4];
 		region[0] = r[0]; //xMin;
 		region[1] = r[1]; //xMax;
 		region[2] = r[2]; //yMin;

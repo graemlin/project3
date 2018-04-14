@@ -46,7 +46,7 @@ public class node {
 	public boolean isInZRange(query foo){
 		return value[2] <= foo.zMax && value[2] >= foo.zMin;
 	}
-	
+
 	public String toString(){
 		return "X: " + value[0] + "  Y: " + value[1] + "  Z: " + value[2];
 	}

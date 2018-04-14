@@ -41,7 +41,12 @@ public class Main {
 		Collections.sort(pointsByX, new sortNodes('x'));
 		Collections.sort(pointsByY, new sortNodes('y'));
 		Collections.sort(pointsByZ, new sortNodes('z'));
-		
+
+
+		Integer[] region = {pointsByX.get(0).value[0], pointsByX.get(pointsByX.size() -1).value[0],
+				pointsByY.get(0).value[1], pointsByY.get(pointsByY.size() -1).value[1]};
+
+		node root = buildKDTree(pointsByX,pointsByY,pointsByZ,region,0);
 
 		//test code
 		System.out.println("points test");
@@ -84,11 +89,12 @@ public class Main {
 				leaf.assocZ = assoc;
 
 				//setting its region to itself
-				leaf.setRegion(leaf.value);
+
+//				leaf.setRegion(leaf.value);
 				return leaf;
 			}
 
-			int median = (int)Math.ceil(sortedX.size()/2);
+			int median = (int)Math.ceil((double)sortedX.size()/2);
 
 			//split on x with median on left
 			ArrayList<node> leftX = new ArrayList<>(sortedX.subList(0, median));
@@ -146,11 +152,11 @@ public class Main {
 				leaf.assocZ = assoc;
 
 				//setting its region to itself
-				leaf.setRegion(leaf.value);
+//				leaf.setRegion(leaf.value);
 				return leaf;
 			}
 
-			int median = (int)Math.ceil(sortedY.size()/2);
+			int median = (int)Math.ceil((double)sortedY.size()/2);
 			//split on y with median on bottom
 			ArrayList<node> bottomY = new ArrayList<>(sortedY.subList(0, median));
 			ArrayList<node> topY = new ArrayList<>(sortedY.subList(median, sortedY.size()));
@@ -181,8 +187,8 @@ public class Main {
 			}
 
 			//used to recursively set regions for proceeding nodes
-			Integer[] bottomRegion = {region[0], region[1], splitNode.value[1], region[3]};
-			Integer[] topRegion = {region[0], region[1], region[2], splitNode.value[1]};
+			Integer[] bottomRegion = {region[0], region[1],region[2] , splitNode.value[1]};
+			Integer[] topRegion = {region[0], region[1], splitNode.value[1], region[3]};
 
 			node vLeft = buildKDTree(bottomX, bottomY, bottomZ, bottomRegion,depth+1);
 			node vRight = buildKDTree(topX, topY, topZ, topRegion, depth+1);

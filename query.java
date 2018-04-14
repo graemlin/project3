@@ -20,6 +20,14 @@ public class query {
 		zMin = coords[4];
 		zMax = coords[5];
 	}
+		
+	public ArrayList<node> checkNodesByZ(ArrayList<node> foo){
+		ArrayList<node> inQuery = new ArrayList<node>();
+		for(node bar : foo){
+			if(bar.isInZRange(this)) inQuery.add(bar);
+		}
+		return inQuery;
+	}
 	
 	public String toString(){
 		return "xMin: " + xMin + "  xMax: " + xMax + "  yMin: " + yMax

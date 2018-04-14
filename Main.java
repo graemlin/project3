@@ -156,7 +156,7 @@ public class Main {
 			ArrayList<node> topY = new ArrayList<>(sortedY.subList(median, sortedY.size()));
 			node splitNode = bottomY.get(bottomY.size()-1);
 			splitNode.setAssocZ(sortedZ);
-			
+
 			ArrayList<node> bottomX = new ArrayList<>();
 			ArrayList<node> topX = new ArrayList<>();
 			ArrayList<node> bottomZ = new ArrayList<>();

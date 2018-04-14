@@ -34,8 +34,10 @@ public class node {
 		region[3] = r[3]; //yMax;
 	}
 		
-	public boolean isInZRange(query foo){
-		return value[2] <= foo.zMax && value[2] >= foo.zMin;
+	public boolean isInQuery(query foo){
+		return value[0] <= foo.xMax && value[0] >= foo.xMin && 
+				value[1] <= foo.yMax && value[1] >= foo.yMin && 
+				value[2] <= foo.zMax && value[2] >= foo.zMin;
 	}
 	
 	public String toString(){

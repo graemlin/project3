@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class query {
 
@@ -24,7 +26,7 @@ public class query {
 	public ArrayList<node> checkNodesByZ(ArrayList<node> foo){
 		ArrayList<node> inQuery = new ArrayList<node>();
 		for(node bar : foo){
-			if(bar.isInZRange(this)) inQuery.add(bar);
+			if(bar.isInQuery(this)) inQuery.add(bar);
 		}
 		return inQuery;
 	}

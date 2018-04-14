@@ -42,7 +42,7 @@ public class Main {
 		Collections.sort(pointsByY, new sortNodes('y'));
 		Collections.sort(pointsByZ, new sortNodes('z'));
 		
-		
+
 		//test code
 		System.out.println("points test");
 		for(int i = 0; i < numPoints; i++){
@@ -70,7 +70,7 @@ public class Main {
 		}
 	}
 
-	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, int[] region, int depth) {
+	private static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, ArrayList<node> sortedZ, int[] region, int depth) {
 
 		if(depth%2 == 0) {
 			if(sortedX.size() == 1) {
@@ -89,6 +89,8 @@ public class Main {
 
 			ArrayList<node> leftY = new ArrayList<>();
 			ArrayList<node> rightY = new ArrayList<>();
+			ArrayList<node> leftZ = new ArrayList<>();
+			ArrayList<node> rightZ = new ArrayList<>();
 
 			//select subset of nodes from sorted y list
 			for (int i=0; i<sortedY.size(); i++) {
@@ -99,11 +101,21 @@ public class Main {
 				}
 			}
 
+
+			//select subset of nodes from sorted z list
+			for (int i=0; i<sortedZ.size(); i++) {
+				if(sortedZ.get(i).value[0] > splitNode.value[0]) {
+					rightZ.add(sortedZ.get(i));
+				} else {
+					leftZ.add(sortedZ.get(i));
+				}
+			}
+
 			int[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
 			int[] rightRegion = {splitNode.value[0],region[1], region[2], region[3]};
 
-			node vLeft = buildKDTree(leftX, leftY, leftRegion,depth+1);
-			node vRight = buildKDTree(rightX, rightY, rightRegion, depth+1);
+			node vLeft = buildKDTree(leftX, leftY, leftZ, leftRegion,depth+1);
+			node vRight = buildKDTree(rightX, rightY, rightZ, rightRegion, depth+1);
 
 			vLeft.setRegion(leftRegion);
 			vRight.setRegion(rightRegion);
@@ -129,6 +141,8 @@ public class Main {
 
 			ArrayList<node> bottomX = new ArrayList<>();
 			ArrayList<node> topX = new ArrayList<>();
+			ArrayList<node> bottomZ = new ArrayList<>();
+			ArrayList<node> topZ = new ArrayList<>();
 
 			//select subset of nodes from sorted x list
 			for (int i=0; i<sortedX.size(); i++) {
@@ -139,11 +153,21 @@ public class Main {
 				}
 			}
 
+			//select subset of nodes from sorted z list
+			for (int i=0; i<sortedZ.size(); i++) {
+				if(sortedZ.get(i).value[1] > splitNode.value[1]) {
+					topZ.add(sortedZ.get(i));
+				} else {
+					bottomZ.add(sortedZ.get(i));
+				}
+			}
+
+			//used to recursively set regions for proceeding nodes
 			int[] bottomRegion = {region[0], region[1], splitNode.value[1], region[3]};
 			int[] topRegion = {region[0], region[1], region[2], splitNode.value[1]};
-			
-			node vLeft = buildKDTree(bottomX, bottomY, bottomRegion,depth+1);
-			node vRight = buildKDTree(topX, topY, topRegion,depth+1);
+
+			node vLeft = buildKDTree(bottomX, bottomY, bottomZ, bottomRegion,depth+1);
+			node vRight = buildKDTree(topX, topY, topZ, topRegion, depth+1);
 
 			vLeft.setRegion(bottomRegion);
 			vRight.setRegion(topRegion);

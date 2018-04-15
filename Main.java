@@ -47,9 +47,13 @@ public class Main {
 				pointsByY.get(0).value[1], pointsByY.get(pointsByY.size() -1).value[1]};
 
 		node root = KDTree.buildKDTree(pointsByX,pointsByY,pointsByZ,region,0);
+		
+		for(int i = 0; i < numQueries; i++){
+			System.out.println(KDTree.searchKDTree(root, queries.get(i)).size());
+		}
 
 		//test code
-		System.out.println("points test");
+		/*System.out.println("points test");
 		for(int i = 0; i < numPoints; i++){
 			System.out.println(points.get(i));
 		}
@@ -72,7 +76,6 @@ public class Main {
 		System.out.println("pointsByZ test");
 		for(int i = 0; i < numPoints; i++){
 			System.out.println(pointsByZ.get(i));
-		}
+		}*/
 	}
-
-	}
+}

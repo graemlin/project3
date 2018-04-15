@@ -23,7 +23,7 @@ public class query {
 		zMax = coords[5];
 	}
 		
-    public ArrayList<node> binarySearchonZ(ArrayList<node> sortedZ, int minZ, int maxZ)
+    public ArrayList<node> binarySearchonZ(ArrayList<node> sortedZ)
     {
 	int top = sortedZ.size() - 1;
 	int bottom = 0;
@@ -32,11 +32,11 @@ public class query {
 	while(top > bottom)
 	{
 	    mid = (top + bottom)/2;
-	    if(sortedZ.get(mid).value[2].intValue() < minZ)
+	    if(sortedZ.get(mid).value[2].intValue() < zMin)
 	    {
 		bottom = mid+1;
 	    }
-	    else if(sortedZ.get(mid).value[2].intValue() > minZ)
+	    else if(sortedZ.get(mid).value[2].intValue() > zMin)
 	    {
 		top = mid-1;
 	    }
@@ -50,11 +50,11 @@ public class query {
 	while(top > bottom)
 	{
 	    mid = (top + bottom)/2;
-	    if(sortedZ.get(mid).value[2].intValue() < maxZ)
+	    if(sortedZ.get(mid).value[2].intValue() < zMin)
 	    {
 		bottom = mid+1;
 	    }
-	    else if(sortedZ.get(mid).value[2].intValue() > maxZ)
+	    else if(sortedZ.get(mid).value[2].intValue() > zMin)
 	    {
 		top = mid-1;
 	    }

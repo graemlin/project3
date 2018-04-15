@@ -36,7 +36,7 @@ public class query {
 	    {
 		bottom = mid+1;
 	    }
-	    else if(sortedZ.get(mid).value[2].intValue() > zMin)
+	    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
 	    {
 		top = mid-1;
 	    }
@@ -46,22 +46,23 @@ public class query {
 	top = sortedZ.size() - 1;
 	bottom = 0;
 	mid = 0;
+	mid = (top + bottom)/2;
 
 	while(top > bottom)
 	{
-	    mid = (top + bottom)/2;
-	    if(sortedZ.get(mid).value[2].intValue() < zMin)
+	    if(sortedZ.get(mid).value[2].intValue() < zMax)
 	    {
 		bottom = mid+1;
 	    }
-	    else if(sortedZ.get(mid).value[2].intValue() > zMin)
+	    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
 	    {
 		top = mid-1;
 	    }
+	    mid = (top + bottom)/2;
 	}
 	int maxI = mid;
 
-	ArrayList<node> range = (ArrayList<node>) sortedZ.subList(minI, maxI);
+	ArrayList<node> range = new ArrayList<node>(sortedZ.subList(minI, maxI+1));
 
 	return range;
 

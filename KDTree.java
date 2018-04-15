@@ -7,19 +7,41 @@ public class KDTree {
 		ArrayList<node> inQuery = new ArrayList<node>();
 		if(root.isInQuery(q) && root.leftChild == null && root.rightChild == null){
 			inQuery.add(root);
+			return inQuery;
 		}
-		else if(root.region[0] >= q.xMin && root.region[1] <= q.xMax && 
-				root.region[2] >= q.yMin && root.region[3] <= q.yMax){
-			inQuery.addAll(q.binarySearchonZ(root.assocZ));
+		if(root.leftChild != null && root.leftChild.region[0] >= q.xMin && root.leftChild.region[1] <= q.xMax && 
+				root.leftChild.region[2] >= q.yMin && root.leftChild.region[3] <= q.yMax){
+			System.out.println("bSearch on : " + root.leftChild + " query: " + q);
+			inQuery.addAll(q.binarySearchonZ(root.leftChild.assocZ));
 		}
-		else if(root.leftChild != null && (root.leftChild.region[0] >= q.xMin || 
-				root.leftChild.region[1] <= q.xMax) && (root.leftChild.region[2] >= q.yMin || root.leftChild.region[3] <= q.yMax)){
+		else if(root.leftChild != null && (root.leftChild.region[1] >= q.xMin || 
+				root.leftChild.region[0] <= q.xMax) && (root.leftChild.region[3] >= q.yMin || root.leftChild.region[2] <= q.yMax)){
+			System.out.println("searchKDT on : " + root.leftChild + " query: " + q);
 			inQuery.addAll(searchKDTree(root.leftChild, q));
 		}
-		else if(root.rightChild != null && (root.rightChild.region[0] >= q.xMin || 
-				root.rightChild.region[1] <= q.xMax) && (root.rightChild.region[2] >= q.yMin || root.rightChild.region[3] <= q.yMax)){
+		if(root.rightChild != null && root.rightChild.region[0] >= q.xMin && root.rightChild.region[1] <= q.xMax && 
+				root.rightChild.region[2] >= q.yMin && root.rightChild.region[3] <= q.yMax){
+			System.out.println("bSearch on root RC: " + root.rightChild + " query: " + q);
+			inQuery.addAll(q.binarySearchonZ(root.rightChild.assocZ));
+		}
+		else if(root.rightChild != null && (root.rightChild.region[1] >= q.xMin || 
+				root.rightChild.region[0] <= q.xMax) && (root.rightChild.region[3] >= q.yMin || root.rightChild.region[2] <= q.yMax)){
+			System.out.println("searchKDT on : " + root.rightChild + " query: " + q);
 			inQuery.addAll(searchKDTree(root.rightChild, q));
 		}
+		/*if(root.region[0] >= q.xMin && root.region[1] <= q.xMax && 
+				root.region[2] >= q.yMin && root.region[3] <= q.yMax){
+			inQuery.addAll(q.binarySearchonZ(root.assocZ));
+			return inQuery;
+		}
+		if(root.leftChild != null && (root.leftChild.region[1] >= q.xMin || 
+				root.leftChild.region[0] <= q.xMax) && (root.leftChild.region[3] >= q.yMin || root.leftChild.region[2] <= q.yMax)){
+			inQuery.addAll(searchKDTree(root.leftChild, q));
+		}
+		if(root.rightChild != null && (root.rightChild.region[1] >= q.xMin || 
+				root.rightChild.region[0] <= q.xMax) && (root.rightChild.region[3] >= q.yMin || root.rightChild.region[2] <= q.yMax)){
+			inQuery.addAll(searchKDTree(root.rightChild, q));
+		}*/
 		return inQuery;
 	}
 	

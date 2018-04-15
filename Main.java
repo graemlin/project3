@@ -79,7 +79,8 @@ public class Main {
 
 		if(depth%2 == 0) {
 			if(sortedX.size() == 1) {
-				node leaf = sortedX.get(0);
+				node leaf = new node(sortedX.get(0).value[0], sortedX.get(0).value[1],
+						sortedX.get(0).value[2], sortedX.get(0).id);
 				leaf.rightChild = null;
 				leaf.leftChild = null;
 
@@ -88,6 +89,7 @@ public class Main {
 				assoc.add(leaf);
 				leaf.assocZ = assoc;
 
+				//set region to itself
 				Integer[] reg = {leaf.value[0], leaf.value[0], leaf.value[1], leaf.value[1]};
 				leaf.setRegion(reg);
 				return leaf;
@@ -139,7 +141,7 @@ public class Main {
 
 			node vLeft = buildKDTree(leftX, leftY, leftZ, leftRegion,depth+1);
 			node vRight = buildKDTree(rightX, rightY, rightZ, rightRegion, depth+1);
-			
+
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
 
@@ -147,7 +149,8 @@ public class Main {
 
 		} else {
 			if(sortedY.size() == 1) {
-				node leaf = sortedY.get(0);
+				node leaf = new node(sortedY.get(0).value[0], sortedY.get(0).value[1],
+						sortedY.get(0).value[2], sortedY.get(0).id);
 				leaf.rightChild = null;
 				leaf.leftChild = null;
 
@@ -204,11 +207,10 @@ public class Main {
 			Integer[] bottomRegion = {region[0], region[1],region[2] , splitNode.value[1]};
 			Integer[] topRegion = {region[0], region[1], splitNode.value[1], region[3]};
 
+			splitNode.setRegion(region);
 			node vLeft = buildKDTree(bottomX, bottomY, bottomZ, bottomRegion,depth+1);
 			node vRight = buildKDTree(topX, topY, topZ, topRegion, depth+1);
 
-			vLeft.setRegion(bottomRegion);
-			vRight.setRegion(topRegion);
 
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;

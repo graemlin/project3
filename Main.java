@@ -130,10 +130,16 @@ public class Main {
 			for (int i=0; i<sortedZ.size(); i++) {
 				if(sortedZ.get(i).value[0] > splitNode.value[0]) {
 					rightZ.add(sortedZ.get(i));
-				} else {
-					leftZ.add(sortedZ.get(i));
 				}
-			}
+				else if (sortedZ.get(i).value[0] < splitNode.value[0]){
+					leftZ.add(sortedZ.get(i));
+				} else {
+					if (sortedZ.get(i).id > splitNode.id){
+						rightZ.add(sortedZ.get(i));
+				} else {
+						leftZ.add(sortedZ.get(i));
+					}
+			} }
 
 			splitNode.setRegion(region);
 			Integer[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
@@ -198,8 +204,15 @@ public class Main {
 			for (int i=0; i<sortedZ.size(); i++) {
 				if(sortedZ.get(i).value[1] > splitNode.value[1]) {
 					topZ.add(sortedZ.get(i));
-				} else {
+				}
+				else if(sortedZ.get(i).value[1] < splitNode.value[1]){
 					bottomZ.add(sortedZ.get(i));
+				} else {
+					if (sortedZ.get(i).id > splitNode.id) {
+						topZ.add(sortedZ.get(i));
+					} else {
+						bottomZ.add(sortedZ.get(i));
+					}
 				}
 			}
 

@@ -20,7 +20,7 @@ public class Main {
 		
 		int[] coords = new int[3];
 		for(int i = 0; i < numPoints; i++){
-			points.add(new node(s.nextInt(),s.nextInt(), s.nextInt()));
+			points.add(new node(s.nextInt(),s.nextInt(), s.nextInt(), i));
 		}
 		
 		coords = new int[6];
@@ -88,9 +88,8 @@ public class Main {
 				assoc.add(leaf);
 				leaf.assocZ = assoc;
 
-				//setting its region to itself
-
-//				leaf.setRegion(leaf.value);
+				Integer[] reg = {leaf.value[0], leaf.value[0], leaf.value[1], leaf.value[1]};
+				leaf.setRegion(reg);
 				return leaf;
 			}
 
@@ -111,8 +110,16 @@ public class Main {
 			for (int i=0; i<sortedY.size(); i++) {
 				if(sortedY.get(i).value[0] > splitNode.value[0]) {
 					rightY.add(sortedY.get(i));
-				} else {
+				}
+				else if(sortedY.get(i).value[0] < splitNode.value[0])  {
 					leftY.add(sortedY.get(i));
+				}
+				else {
+					if(sortedY.get(i).id > splitNode.id) {
+						rightY.add(sortedY.get(i));
+					} else {
+						leftY.add(sortedY.get(i));
+					}
 				}
 			}
 
@@ -126,15 +133,13 @@ public class Main {
 				}
 			}
 
+			splitNode.setRegion(region);
 			Integer[] leftRegion = {region[0], splitNode.value[0], region[2], region[3]};
 			Integer[] rightRegion = {splitNode.value[0],region[1], region[2], region[3]};
 
 			node vLeft = buildKDTree(leftX, leftY, leftZ, leftRegion,depth+1);
 			node vRight = buildKDTree(rightX, rightY, rightZ, rightRegion, depth+1);
-
-			vLeft.setRegion(leftRegion);
-			vRight.setRegion(rightRegion);
-
+			
 			splitNode.leftChild = vLeft;
 			splitNode.rightChild = vRight;
 
@@ -152,7 +157,8 @@ public class Main {
 				leaf.assocZ = assoc;
 
 				//setting its region to itself
-//				leaf.setRegion(leaf.value);
+				Integer[] reg = {leaf.value[0], leaf.value[0], leaf.value[1], leaf.value[1]};
+				leaf.setRegion(reg);
 				return leaf;
 			}
 
@@ -172,8 +178,16 @@ public class Main {
 			for (int i=0; i<sortedX.size(); i++) {
 				if(sortedX.get(i).value[1] > splitNode.value[1]) {
 					topX.add(sortedX.get(i));
-				} else {
+				}
+				else if(sortedX.get(i).value[1] < splitNode.value[1]) {
 					bottomX.add(sortedX.get(i));
+				}
+				else {
+					if (sortedX.get(i).id > splitNode.id) {
+						topX.add(sortedX.get(i));
+					} else {
+						bottomX.add(sortedX.get(i));
+					}
 				}
 			}
 

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class node {
 
 	Integer[] value;
+	int id;
 	ArrayList<node> assocZ;
 	node leftChild;
 	node rightChild;
@@ -11,11 +12,12 @@ public class node {
 	
 	//associated structure
 	
-	public node(int x, int y, int z){
+	public node(int x, int y, int z, int i){
 		value = new Integer[3];
 		value[0] = new Integer(x);
 		value[1] = new Integer(y);
 		value[2] = new Integer(z);
+		id = i;
 	}
 	
 	public void setLeftChild(node left){

@@ -70,7 +70,9 @@ public class KDTree {
 			//split on x with median on left
 			ArrayList<node> leftX = new ArrayList<>(sortedX.subList(0, median));
 			ArrayList<node> rightX = new ArrayList<>(sortedX.subList(median, sortedX.size()));
-			node splitNode = leftX.get(leftX.size()-1);
+			node medianNode = leftX.get(leftX.size()-1);
+
+			node splitNode = new node(medianNode.value[0], medianNode.value[1], medianNode.value[2], medianNode.id);
 			splitNode.setAssocZ(sortedZ);
 
 			ArrayList<node> leftY = new ArrayList<>();
@@ -145,7 +147,8 @@ public class KDTree {
 			//split on y with median on bottom
 			ArrayList<node> bottomY = new ArrayList<>(sortedY.subList(0, median));
 			ArrayList<node> topY = new ArrayList<>(sortedY.subList(median, sortedY.size()));
-			node splitNode = bottomY.get(bottomY.size()-1);
+			node medianNode = bottomY.get(bottomY.size()-1);
+			node splitNode = new node(medianNode.value[0], medianNode.value[1], medianNode.value[2], medianNode.id);
 			splitNode.setAssocZ(sortedZ);
 
 			ArrayList<node> bottomX = new ArrayList<>();

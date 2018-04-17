@@ -67,22 +67,27 @@ public class query {
 		    mid = (top + bottom)/2;
 		}
 		int maxI = mid;
-	
-		while(minI > 0 && sortedZ.get(minI-1).value[2] > zMin){
+		int comps = 0;
+		while(minI > 0 && sortedZ.get(minI-1).value[2] >= zMin){
 			minI--;
+			comps++;
 		}
-		while(maxI > 0 && sortedZ.get(maxI).value[2] > zMax){
+		while(maxI > 0 && sortedZ.get(maxI-1).value[2] > zMax){
 			maxI--;
+			//comps++;
 		}
 		while(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax){
 			maxI++;
+			//comps++;
 		}
 		while(minI < sortedZ.size() && sortedZ.get(minI).value[2] < zMin){
 			minI++;
+			//comps++;
 			//System.out.println("MinComp");
 		}
 		//if(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax) maxI++;*/
 		int index = 0;
+		//System.out.println("Comps: " + comps);
 		
 		/*while(index <= sortedZ.size() && sortedZ.get(index).value[2] < zMin){
 			index++;
@@ -94,18 +99,44 @@ public class query {
 			index--;
 		}
 		int oldMaxI = maxI;
-		maxI = index+1;*/
+		maxI = index+1;
+		*/
+
 		
 		if(maxI < minI || minI == sortedZ.size() || maxI == 0) {
 			return new ArrayList<node>();
 		}
 		
+		/*if(oldminI != minI || oldMaxI != maxI){
+			System.out.println("DISPARITY " + this);
+		}*/
 		
 		ArrayList<node> range = new ArrayList<node>(sortedZ.subList(minI, maxI));
 	
 		return range;
 
     }
+    
+    /*public ArrayList<node> superSearch(ArrayList<node> sortedZ){
+    	ArrayList<node> results;
+    	
+    	int minI = -1;
+    	int maxI = -1;
+    	int top = sortedZ.size() - 1;
+    	int bottom = 0;
+    	int mid = 0;
+    	
+    	while(bottom < top){
+    		mid = (top + bottom) / 2;
+    		if(sortedZ.get(mid).value[2] < zMin){
+    			bottom = mid + 1;
+    		}
+    		else{
+    			top = mid;
+    		}
+    	}
+    	minI = bottom;
+    }*/
 	
 	public String toString(){
 		return "xMin: " + xMin + "  xMax: " + xMax + "  yMin: " + yMax

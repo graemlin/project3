@@ -47,10 +47,13 @@ public class Main {
 				pointsByY.get(0).value[1], pointsByY.get(pointsByY.size() -1).value[1]};
 
 		node root = KDTree.buildKDTree(pointsByX,pointsByY,pointsByZ,region,0);
-		
+		long totalSum = 0;
 		for(int i = 0; i < numQueries; i++){
-			System.out.println(KDTree.searchKDTree(root, queries.get(i)).size());
+			int result = KDTree.searchKDTree(root, queries.get(i)).size();
+			System.out.println(result);
+			totalSum += result;
 		}
+		//System.out.println(totalSum);
 
 		//test code
 		/*System.out.println("points test");

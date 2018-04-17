@@ -71,6 +71,9 @@ public class query {
 		while(minI > 0 && sortedZ.get(minI-1).value[2] > zMin){
 			minI--;
 		}
+		while(maxI > 0 && sortedZ.get(maxI).value[2] > zMax){
+			maxI--;
+		}
 		while(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax){
 			maxI++;
 		}
@@ -81,7 +84,7 @@ public class query {
 		//if(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax) maxI++;*/
 		int index = 0;
 		
-		while(index <= sortedZ.size() && sortedZ.get(index).value[2] < zMin){
+		/*while(index <= sortedZ.size() && sortedZ.get(index).value[2] < zMin){
 			index++;
 		}
 		int oldminI = minI;
@@ -91,7 +94,7 @@ public class query {
 			index--;
 		}
 		int oldMaxI = maxI;
-		maxI = index+1;
+		maxI = index+1;*/
 		
 		if(maxI < minI || minI == sortedZ.size() || maxI == 0) {
 			return new ArrayList<node>();

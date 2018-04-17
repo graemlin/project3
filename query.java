@@ -25,46 +25,82 @@ public class query {
 		
     public ArrayList<node> binarySearchonZ(ArrayList<node> sortedZ)
     {
-	int top = sortedZ.size() - 1;
-	int bottom = 0;
-	int mid = 0;
-
-	while(top > bottom)
-	{
-	    mid = (top + bottom)/2;
-	    if(sortedZ.get(mid).value[2].intValue() < zMin)
-	    {
-		bottom = mid+1;
-	    }
-	    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
-	    {
-		top = mid-1;
-	    }
-	}
-	int minI = mid;
-
-	top = sortedZ.size() - 1;
-	bottom = 0;
-	mid = 0;
-	mid = (top + bottom)/2;
-
-	while(top > bottom)
-	{
-	    if(sortedZ.get(mid).value[2].intValue() < zMax)
-	    {
-		bottom = mid+1;
-	    }
-	    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
-	    {
-		top = mid-1;
-	    }
-	    mid = (top + bottom)/2;
-	}
-	int maxI = mid;
-
-	ArrayList<node> range = new ArrayList<node>(sortedZ.subList(minI, maxI+1));
-
-	return range;
+    	if(sortedZ.size() == 1){
+    		if(sortedZ.get(0).value[2] >= zMin && sortedZ.get(0).value[2] <= zMax) return sortedZ;
+    		else return new ArrayList<node>();
+    	}
+    
+    	if(sortedZ.get(sortedZ.size()-1).value[2] < zMin) return new ArrayList<node>();
+		int top = sortedZ.size() - 1;
+		int bottom = 0;
+		int mid = 0;
+	
+		while(top > bottom)
+		{
+		    mid = (top + bottom)/2;
+		    if(sortedZ.get(mid).value[2].intValue() < zMin)
+		    {
+			bottom = mid+1;
+		    }
+		    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
+		    {
+			top = mid-1;
+		    }
+		}
+		int minI = mid;
+	
+		top = sortedZ.size() - 1;
+		bottom = 0;
+		mid = 0;
+		mid = (top + bottom)/2;
+	
+		while(top > bottom)
+		{
+		    if(sortedZ.get(mid).value[2].intValue() < zMax)
+		    {
+			bottom = mid+1;
+		    }
+		    else //if(sortedZ.get(mid).value[2].intValue() > zMin)
+		    {
+			top = mid-1;
+		    }
+		    mid = (top + bottom)/2;
+		}
+		int maxI = mid;
+	
+		while(minI > 0 && sortedZ.get(minI-1).value[2] > zMin){
+			minI--;
+		}
+		while(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax){
+			maxI++;
+		}
+		while(minI < sortedZ.size() && sortedZ.get(minI).value[2] < zMin){
+			minI++;
+			//System.out.println("MinComp");
+		}
+		//if(maxI < sortedZ.size() && sortedZ.get(maxI).value[2] <= zMax) maxI++;*/
+		int index = 0;
+		
+		while(index <= sortedZ.size() && sortedZ.get(index).value[2] < zMin){
+			index++;
+		}
+		int oldminI = minI;
+		minI = index;
+		index = sortedZ.size()-1;
+		while(index >= 0 && sortedZ.get(index).value[2] > zMax){
+			index--;
+		}
+		int oldMaxI = maxI;
+		maxI = index+1;
+		
+		if(maxI < minI || minI == sortedZ.size() || maxI == 0) {
+			return new ArrayList<node>();
+		}
+		
+		
+		ArrayList<node> range = new ArrayList<node>(sortedZ.subList(minI, maxI));
+	
+		return range;
 
     }
 	

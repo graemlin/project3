@@ -5,16 +5,20 @@ public class sortNodes implements Comparator<node>{
 	
 	private char compareBy = 'x';
 
+	//default constructor
 	public sortNodes(){
 		
 	}
 	
+	//determines which axis the comparison will be on depending on the char passed in
 	public sortNodes(char compareByAxis){
 		compareBy = compareByAxis;
 	}
 
 	//inspired by piazza post 168
+	//compare function
 	public int compare(node foo, node bar){
+		//if the x, y, or z values is not equal, compare those values; if they are equal, compare their ids
 		switch(compareBy){
 		case 'x':
 			 return (foo.value[0] != bar.value[0]) ? foo.value[0] - bar.value[0]:foo.id - bar.id;

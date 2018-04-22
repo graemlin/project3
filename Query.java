@@ -1,3 +1,12 @@
+/**
+
+ Group Member 1:				Milan Bhatia		19228
+ Group Member 2:				Alexander Mundy		19228
+ Group Member 3:				Aliyah White		12721
+
+
+ */
+
 import java.util.ArrayList;
 
 /**

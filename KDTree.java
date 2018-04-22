@@ -4,31 +4,37 @@ import java.util.ArrayList;
 public class KDTree {
 
 	public static ArrayList<node> searchKDTree(node root, query q){
-		ArrayList<node> inQuery = new ArrayList<node>();
+		ArrayList<node> inQuery = new ArrayList<node>(); //ArrayList of nodes in the Query range
+		//if the root is in the query and has no children, add the root to the ArrayList and return it
 		if(root.isInQuery(q) && root.leftChild == null && root.rightChild == null){
 			inQuery.add(root);
 			return inQuery;
 		}
+		//if the root has a left child and the all of the child's x and y values are in the query range, add all the 
+		//associated z values in the range to the ArrayList
 		if(root.leftChild != null && root.leftChild.region[0] >= q.xMin && root.leftChild.region[1] <= q.xMax && 
 				root.leftChild.region[2] >= q.yMin && root.leftChild.region[3] <= q.yMax){
-			System.out.println("bSearch on : " + root.leftChild + " query: " + q);
 			inQuery.addAll(q.binarySearchonZ(root.leftChild.assocZ));
 		}
+		//if the root has a left child and some of the child's x and y values are in the query range, recursively search the child
+		//to find the x and y values in range
 		else if(root.leftChild != null && (root.leftChild.region[1] >= q.xMin || 
 				root.leftChild.region[0] <= q.xMax) && (root.leftChild.region[3] >= q.yMin || root.leftChild.region[2] <= q.yMax)){
-			System.out.println("searchKDT on : " + root.leftChild + " query: " + q);
 			inQuery.addAll(searchKDTree(root.leftChild, q));
 		}
+		//if the root has a right child and the all of the child's x and y values are in the query range, add all the 
+		//associated z values in the range to the ArrayList
 		if(root.rightChild != null && root.rightChild.region[0] >= q.xMin && root.rightChild.region[1] <= q.xMax && 
 				root.rightChild.region[2] >= q.yMin && root.rightChild.region[3] <= q.yMax){
-			System.out.println("bSearch on root RC: " + root.rightChild + " query: " + q);
 			inQuery.addAll(q.binarySearchonZ(root.rightChild.assocZ));
 		}
+		//if the root has a right child and some of the child's x and y values are in the query range, recursively search the child
+		//to find the x and y values in range
 		else if(root.rightChild != null && (root.rightChild.region[1] >= q.xMin || 
 				root.rightChild.region[0] <= q.xMax) && (root.rightChild.region[3] >= q.yMin || root.rightChild.region[2] <= q.yMax)){
-			System.out.println("searchKDT on : " + root.rightChild + " query: " + q);
 			inQuery.addAll(searchKDTree(root.rightChild, q));
 		}
+		//return the ArrayList of nodes in the query range
 		return inQuery;
 	}
 	

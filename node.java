@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
-
+/**
+ * Encapsulates a point
+ */
 public class node {
 
 	Integer[] value;

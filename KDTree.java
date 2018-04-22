@@ -3,6 +3,12 @@ import java.util.ArrayList;
 
 public class KDTree {
 
+	/**
+	 *
+	 * @param root the root of a 2D kd-tree
+	 * @param q the search query
+	 * @return a list of nodes within the query region
+	 */
 	public static ArrayList<node> searchKDTree(node root, query q){
 		ArrayList<node> inQuery = new ArrayList<node>(); //ArrayList of nodes in the Query range
 		//if the root is in the query and has no children, add the root to the ArrayList and return it
@@ -37,7 +43,17 @@ public class KDTree {
 		//return the ArrayList of nodes in the query range
 		return inQuery;
 	}
-	
+
+	/**
+	 * Builds a 2D kd-tree alternatively splitting between x and y axes.
+	 * Each internal node references an associated array sorted on z-coordinates
+	 * @param sortedX nodes sorted by x-coordinate. Used to split nodes at even depth
+	 * @param sortedY nodes sorted by y-coordinate. Used to split nodes at odd depth
+	 * @param sortedZ nodes sorted by z-coordinate. Used to build associated structures
+	 * @param region bounds a node to an xMin, xMax, yMin, yMax rectangular region
+	 * @param depth counter to determine when to split horizontally/vertically
+	 * @return the root of the kd-tree
+	 */
 	public static node buildKDTree(ArrayList<node> sortedX, ArrayList<node> sortedY, ArrayList<node> sortedZ, Integer[] region, int depth) {
 
 		if(depth%2 == 0) {
@@ -74,6 +90,7 @@ public class KDTree {
 			ArrayList<node> rightZ = new ArrayList<>();
 
 			//select subset of nodes from sorted y list
+			//resort to id to break ties
 			for (int i=0; i<sortedY.size(); i++) {
 				if(sortedY.get(i).value[0] > splitNode.value[0]) {
 					rightY.add(sortedY.get(i));

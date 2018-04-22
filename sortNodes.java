@@ -1,6 +1,9 @@
 import java.util.Comparator;
 
-
+/**
+ * contains the custom comparator we use to sort nodes by a
+ * particular axis
+ */
 public class sortNodes implements Comparator<node>{
 	
 	private char compareBy = 'x';

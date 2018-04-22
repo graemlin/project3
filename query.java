@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
-
+/**
+ * encapsulates a query region. Also contains logic
+ * to search associated arrays sorted on z-coordinates
+ * (called in searchKDTree())
+ */
 public class query {
 
 	int xMin;

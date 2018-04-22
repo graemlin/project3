@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-
+/**
+ * Uses System.in to parse input, then calls buildKDTree and SearchKDTree
+ */
 public class Main {
 
 	public static void main(String[] args){

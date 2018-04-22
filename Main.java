@@ -18,16 +18,16 @@ public class Main {
 		numQueries = s.nextInt();
 		
 		//create ArrayLists of nodes and queries
-		ArrayList<node> points = new ArrayList<node>();
-		ArrayList<query> queries = new ArrayList<query>();
+		ArrayList<Node> points = new ArrayList<Node>();
+		ArrayList<Query> queries = new ArrayList<Query>();
 		
-		//add the x, y, and z values read in, and id value from the for loop, as a node to the node array
+		//add the x, y, and z values read in, and id value from the for loop, as a Node to the Node array
 		int[] coords = new int[3];
 		for(int i = 0; i < numPoints; i++){
-			points.add(new node(s.nextInt(),s.nextInt(), s.nextInt(), i));
+			points.add(new Node(s.nextInt(),s.nextInt(), s.nextInt(), i));
 		}
 		
-		//add the queries read in to the query array
+		//add the queries read in to the Query array
 		coords = new int[6];
 		for(int i = 0; i < numQueries; i++){
 			coords[0] = s.nextInt();
@@ -36,24 +36,24 @@ public class Main {
 			coords[3] = s.nextInt();
 			coords[4] = s.nextInt();
 			coords[5] = s.nextInt();
-			queries.add(new query(coords));
+			queries.add(new Query(coords));
 		}
 		
 		//create an ArrayList of nodes that will then be sorted by their x, y, or z values
-		ArrayList<node> pointsByX = new ArrayList<node>(points);
-		ArrayList<node> pointsByY = new ArrayList<node>(points);
-		ArrayList<node> pointsByZ = new ArrayList<node>(points);
+		ArrayList<Node> pointsByX = new ArrayList<Node>(points);
+		ArrayList<Node> pointsByY = new ArrayList<Node>(points);
+		ArrayList<Node> pointsByZ = new ArrayList<Node>(points);
 		
-		Collections.sort(pointsByX, new sortNodes('x'));
-		Collections.sort(pointsByY, new sortNodes('y'));
-		Collections.sort(pointsByZ, new sortNodes('z'));
+		Collections.sort(pointsByX, new SortNodes('x'));
+		Collections.sort(pointsByY, new SortNodes('y'));
+		Collections.sort(pointsByZ, new SortNodes('z'));
 
 		//set the region of x and y by using the sorted nodes
 		Integer[] region = {pointsByX.get(0).value[0], pointsByX.get(pointsByX.size() -1).value[0],
 				pointsByY.get(0).value[1], pointsByY.get(pointsByY.size() -1).value[1]};
 
-		//define the root node
-		node root = KDTree.buildKDTree(pointsByX,pointsByY,pointsByZ,region,0);
+		//define the root Node
+		Node root = KDTree.buildKDTree(pointsByX,pointsByY,pointsByZ,region,0);
 		
 		//for each of the queries, seach the KDTree to get the number of points within that range and print it out
 		for(int i = 0; i < numQueries; i++){
